@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 app = Flask(__name__)
 
 
 @app.route('/')
 def homepage():
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
