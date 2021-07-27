@@ -1,4 +1,15 @@
-<form class="" action="data" method="post">
-    <input type="file" name="flatfile" value="">
+<!-- <label for='data file'>Upload a dataset:</label>
+<form action="upload" method="post" enctype=multipart/form-data>
+    <input type="file" id='flatfile' name="flatfile">
     <input type="submit" name="" value="Submit">
+</form> -->
+<!doctype html>
+<title>Upload new File</title>
+<h2>Welcome to the Bedford's law data tool!</h2>
+<h4>Upload a data set containing numerical data to see how well it matches Bedford's law.</h4>
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file><br><br>
+    <label for="col_name">Name of the numerical column:</label><br>
+    <input type=text name=col_name>
+    <input type=submit value=Upload>
 </form>

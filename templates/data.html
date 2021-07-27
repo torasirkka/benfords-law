@@ -1,0 +1,15 @@
+<!-- <img class="fit-picture" src="histogram.png" alt="Distribution of first digits"> -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+<div>
+    <h3 align='center'>Probability distribution for the first digit of the dataset numbers, compared to that
+        predicted by Bedford's law.
+    </h3>
+</div>
+<div class="chart" id="bargraph">
+    <script>
+        let graphs = {{ plot | safe}};
+        Plotly.plot('bargraph', graphs, {});
+    </script>
+</div>
