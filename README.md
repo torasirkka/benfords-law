@@ -12,10 +12,10 @@ Benford's law predicts the following frequency distribution for the leading digi
     8: 0.049,
     9: 0.042
 
-Limitation: I only handle numbers that are larger than 1.
+Limitation: I only handle numbers that are larger than 1. I worked on adding a chi-squared test to determine if the difference between the two sets is significant or not but getting scipy and numpy installed on my M1 computer turned out to be a real headache so I put that on hold.
 
 ## Requirements
-You need Python3 for this project. You also need the libraries `flask`, `plotly` and `pandas`. 
+You need Python3 for this project. You also need the libraries `flask`, `plotly`, and `pandas`. 
 
 ## Quick-start:
 Checkout program, install libraries and run program:
@@ -24,6 +24,6 @@ git clone https://github.com/torasirkka/benfords-law.git
 cd benfords-law
 virtualenv env
 source env/bin/activate
-pip3 install -r requirementsn.txt
+pip3 install -r requirements.txt
 python3 server.py
 ```
