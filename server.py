@@ -93,15 +93,9 @@ def _benford_plot(df: pd.DataFrame, col_name: str)-> Tuple[Any,bool]:
 def _chi_squared_GOF(expected: pd.Series, observed: pd.Series):
     """
     Runs a chi-square goodness-of-fit test and returns the p-value.
-    Inputs:
-    - expected: numpy array of expected values.
-    - observed: numpy array of observed values.
-    Returns: p-value
     """
-    expected_scaled = expected / float(sum(expected)) * sum(observed)
-    result = stats.chisquare(f_obs=observed, f_exp=expected_scaled)
-    return result[1]
-
+    _, result = ss.chisquare(f_obs=observed, f_exp=expected)
+    return result
 
 if __name__ == '__main__':
   app.secret_key = 'super secret key' 
