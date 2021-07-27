@@ -4,8 +4,6 @@ import pandas as pd
 import plotly
 import plotly.graph_objs as go
 import json
-import numpy as np
-import scipy.stats as stats
 
 from typing import Any, Tuple
 
@@ -42,16 +40,16 @@ def upload_file():
         return render_template('index.html')
 
       # generate bar plot data
-      bar, p_val = _benford_plot(df, col_name)
+      bar = _benford_plot(df, col_name)
       
-      if p_val < 0.5:
-        analysis = "significantly different"
-      else: 
-        analysis = "not significantly different"
+      # if p_val < 0.5:
+      #   analysis = "significantly different"
+      # else: 
+      #   analysis = "not significantly different"
 
 
       # send bar plot data to front end 
-      return render_template('data.html', plot=bar, analysis=analysis)
+      return render_template('data.html', plot=bar)
 
 
 def _first_num(i:int)->int:
@@ -62,7 +60,7 @@ def _first_num(i:int)->int:
   s = str(i)
   return int(s[0])
 
-def _benford_plot(df: pd.DataFrame, col_name: str)-> Tuple(Any,bool):
+def _benford_plot(df: pd.DataFrame, col_name: str)-> Tuple[Any,bool]:
   """Dataframe that generates a benford bar plot describing the probability
   distribution for the first digit of the numbers in col_name."""
 
@@ -80,15 +78,16 @@ def _benford_plot(df: pd.DataFrame, col_name: str)-> Tuple(Any,bool):
     )
   plot_data = pd.concat([observed, theoretical_vals], axis = 1)
 
-  # Analyze how well the data fits with the predicted frequency distribution
-  p_val = _chi_squared_GOF(theoretical_vals, observed)
+  # Analyze how well the data fits with the predicted frequency distribution.
+  # Can't install scipy on my M1 Mac. so instead creating a 
+  # p_val = _chi_squared_GOF(theoretical_vals, observed)
 
   # plot resuts
   data = [go.Bar(y = plot_data[col_name], x = plot_data.index, name=f'Submitted dataset: {col_name}.'),
           go.Bar(y = plot_data["Benfords Law"], x=plot_data.index, name="Benford's Law Prediction")]
 
   graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
-  return (graphJSON, analysis)
+  return graphJSON
 
 
 def _chi_squared_GOF(expected: pd.Series, observed: pd.Series):
